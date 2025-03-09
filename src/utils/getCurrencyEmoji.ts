@@ -14,6 +14,8 @@ export const getCurrencyEmoji = (currencyCode: string) => {
       return "🇧🇬";
     case "CAD":
       return "🇨🇦";
+    case "CZK":
+      return "🇨🇿";
     case "CNY":
       return "🇨🇳";
     case "DKK":

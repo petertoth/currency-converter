@@ -17,5 +17,5 @@ app.get("/api/currency-exchange-rates", async (_, res) => {
 });
 
 ViteExpress.listen(app, process.env.PORT || 3000, () =>
-  console.log("Server is listening...")
+  console.log(`Server is listening on http://localhost:${process.env.PORT || 3000}...`)
 );

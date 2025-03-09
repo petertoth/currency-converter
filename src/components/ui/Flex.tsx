@@ -9,6 +9,7 @@ export interface FlexProps {
   align?: "flex-start" | "flex-end" | "center" | "stretch";
   gap?: string | number;
   flexGrow?: number;
+  width?: string | number;
   children?: React.ReactNode;
 }
 
@@ -18,6 +19,7 @@ export const Flex = ({
   align,
   gap,
   flexGrow,
+  width,
   children,
 }: FlexProps) => {
   return (
@@ -29,6 +31,7 @@ export const Flex = ({
         alignItems: align,
         gap: gap,
         flexGrow: flexGrow,
+        width: width,
       }}
     >
       {children}
