@@ -55,3 +55,7 @@ To run the end-to-end tests with Playwright:
 ```bash
 npm run test
 ```
+
+### Lighthouse Score
+
+![Screenshot 2025-03-10 at 10 27 45](https://github.com/user-attachments/assets/9fe047de-2d5f-4810-a53c-90f23fd1d12b)
