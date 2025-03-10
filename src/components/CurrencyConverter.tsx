@@ -197,11 +197,15 @@ const CurrencyDisplay = styled.p`
 
 const ConversionResult = styled.div`
   margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ConversionText = styled.p`
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
   line-height: 1.5;
 `;
 
