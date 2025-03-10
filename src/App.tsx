@@ -1,25 +1,35 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { styled } from "styled-components";
-import { CurrencyExchangeRatesTable } from "./components/CurrencyExchangeRatesTable";
+import {
+  CurrencyExchangeRatesTable,
+  CurrencyExchangeRatesTableSkeleton,
+} from "./components/CurrencyExchangeRatesTable";
 import { CurrencyConverter } from "./components/CurrencyConverter";
 import { useCentralBankExchangeRates } from "./hooks/useCentalBankExchangeRates";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const { data, error } = useCentralBankExchangeRates();
+  const {
+    data: currencyExchangeRates,
+    isLoading,
+    error,
+  } = useCentralBankExchangeRates();
 
   return (
     <QueryClientProvider client={queryClient}>
       <AppGrid>
         <StickyContainer>
-          {error ? (
-            <ErrorMessage>Error: {error.message}</ErrorMessage>
-          ) : (
-            <CurrencyConverter currencyExchangeRates={data ?? []} />
+          {error && <ErrorMessage>Error: {error.message}</ErrorMessage>}
+          {currencyExchangeRates && (
+            <CurrencyConverter currencyExchangeRates={currencyExchangeRates} />
           )}
         </StickyContainer>
-        <CurrencyExchangeRatesTable data={data ?? []} />
+
+        {isLoading && <CurrencyExchangeRatesTableSkeleton />}
+        {!isLoading && currencyExchangeRates && (
+          <CurrencyExchangeRatesTable data={currencyExchangeRates} />
+        )}
       </AppGrid>
     </QueryClientProvider>
   );
@@ -39,11 +49,12 @@ const AppGrid = styled.div`
   display: grid;
 
   @media (min-width: 768px) {
-    gap: 48px;
+    gap: 24px;
     grid-template-columns: 1fr 1fr;
   }
 
   @media (min-width: 1024px) {
+    gap: 48px;
     grid-template-columns: 3fr 5fr;
   }
 

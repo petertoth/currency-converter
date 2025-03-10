@@ -1,6 +1,7 @@
 import { CurrencyExchangeRate } from "../hooks/useCentalBankExchangeRates";
 import { getCurrencyEmoji } from "../utils/getCurrencyEmoji";
 import { sortCurrencyExchangeRates } from "../utils/sortCurrencyExchangeRates";
+import { Skeleton } from './ui/Skeleton';
 import { Table, Thead, Tr, Th, Tbody, Td, TableContainer } from "./ui/Table";
 
 export interface CurrencyExchangeRatesTableProps {
@@ -43,3 +44,44 @@ export const CurrencyExchangeRatesTable = ({
     </TableContainer>
   );
 };
+
+export const CurrencyExchangeRatesTableSkeleton = () => {
+  return (
+    <TableContainer>
+      <Table>
+        <Thead>
+          <Tr>
+            <Th>Country</Th>
+            <Th>Currency</Th>
+            <Th>Code</Th>
+            <Th>Amount</Th>
+            <Th>Rate(CZK)</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {Array.from({ length: 20 }).map((_, index) => (
+            <Tr key={index}>
+              <Td>
+                <Skeleton />
+              </Td>
+              <Td>
+                <Skeleton />
+              </Td>
+              <Td>
+                <Skeleton />
+              </Td>
+              <Td>
+                <Skeleton />
+              </Td>
+              <Td>
+                <Skeleton />
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
+  );
+};
+
+CurrencyExchangeRatesTableSkeleton.displayName = "CurrencyExchangeRatesTableSkeleton";

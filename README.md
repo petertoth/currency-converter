@@ -16,7 +16,7 @@ Live demo: [https://currency-converter-aef2.onrender.com/](https://currency-conv
 - **Frontend**: React 19 with TypeScript
 - **Styling**: Styled Components
 - **State Management**: React Query for data fetching
-- **Server**: Express.js
+- **Server**: Express.js for proxying requests to the Czech National Bank API
 - **Development**: Vite for fast development experience
 - **Testing**: Playwright for end-to-end testing
 
