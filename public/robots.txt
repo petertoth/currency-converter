@@ -1,0 +1,8 @@
+# robots.txt for Currency Converter
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of any temporary files or development assets
+Disallow: /temp/
+Disallow: /dev-assets/

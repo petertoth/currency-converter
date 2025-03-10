@@ -115,77 +115,77 @@ export const CurrencyConverter = ({
     }
   };
 
+  const shouldShowConversionResult = amount && convertedAmount && targetCurrency && !isNaN(realAmount);
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <Flex gap={12} direction="column">
-        <h3>How much do you want to convert?</h3>
+    <Flex gap={12} direction="column">
+      <h3>How much do you want to convert?</h3>
 
-        <Flex gap={24} direction="column">
-          <Flex gap={8} direction="column">
-            <Label htmlFor="amount">Convert</Label>
-            <InputField>
-              <InputWithIcon
-                id="amount"
-                placeholder="0"
-                type="number"
-                value={amount}
-                onChange={handleAmountChange}
-                data-testid="amount-input"
-              />
-              <InputIcon style={{ paddingRight: 16, paddingLeft: 16 }}>
-                <CurrencyDisplay>{getCurrencyEmoji("CZK")} CZK</CurrencyDisplay>
-              </InputIcon>
-            </InputField>
-          </Flex>
-
-          <Flex gap={8} direction="column">
-            <Label htmlFor="targetCurrency">Currency</Label>
-            <InputField>
-              <InputWithIcon
-                id="convertedAmount"
-                placeholder="0"
-                type="number"
-                value={convertedAmount}
-                onChange={handleConvertedAmountChange}
-                data-testid="converted-amount-input"
-              />
-              <InputIcon>
-                <SelectGhost
-                  value={targetCurrency}
-                  onChange={handleCurrencyChange}
-                  id="targetCurrency"
-                  style={{
-                    width: 112,
-                  }}
-                  data-testid="target-currency-select"
-                >
-                  {sortedCurrencyExchangeRates.map((rate) => (
-                    <option key={rate.code} value={getCurrencyValue(rate.code)}>
-                      {getCurrencyValue(rate.code)}
-                    </option>
-                  ))}
-                </SelectGhost>
-              </InputIcon>
-            </InputField>
-          </Flex>
+      <Flex gap={24} direction="column">
+        <Flex gap={8} direction="column">
+          <Label htmlFor="amount">Convert</Label>
+          <InputField>
+            <InputWithIcon
+              id="amount"
+              placeholder="0"
+              type="number"
+              value={amount}
+              onChange={handleAmountChange}
+              data-testid="amount-input"
+            />
+            <InputIcon style={{ paddingRight: 16, paddingLeft: 16 }}>
+              <CurrencyDisplay>{getCurrencyEmoji("CZK")} CZK</CurrencyDisplay>
+            </InputIcon>
+          </InputField>
         </Flex>
 
-        {amount && convertedAmount && targetCurrency && !isNaN(realAmount) && (
-          <ConversionResult>
-            <ConversionText>
-              <span>
-                {formatNumber(realAmount)} CZK {getCurrencyEmoji("CZK")}{" "}
-              </span>
-              <ConversionArrow>→</ConversionArrow>
-              <span>
-                {formatNumber(parseFloat(convertedAmount))} {realTargetCurrency}{" "}
-                {getCurrencyEmoji(realTargetCurrency)}
-              </span>
-            </ConversionText>
-          </ConversionResult>
-        )}
+        <Flex gap={8} direction="column">
+          <Label htmlFor="targetCurrency">Currency</Label>
+          <InputField>
+            <InputWithIcon
+              id="convertedAmount"
+              placeholder="0"
+              type="number"
+              value={convertedAmount}
+              onChange={handleConvertedAmountChange}
+              data-testid="converted-amount-input"
+            />
+            <InputIcon>
+              <SelectGhost
+                value={targetCurrency}
+                onChange={handleCurrencyChange}
+                id="targetCurrency"
+                style={{
+                  width: 112,
+                }}
+                data-testid="target-currency-select"
+              >
+                {sortedCurrencyExchangeRates.map((rate) => (
+                  <option key={rate.code} value={getCurrencyValue(rate.code)}>
+                    {getCurrencyValue(rate.code)}
+                  </option>
+                ))}
+              </SelectGhost>
+            </InputIcon>
+          </InputField>
+        </Flex>
       </Flex>
-    </form>
+
+      {shouldShowConversionResult && (
+        <ConversionResult>
+          <ConversionText>
+            <span>
+              {formatNumber(realAmount)} CZK {getCurrencyEmoji("CZK")}{" "}
+            </span>
+            <ConversionArrow>→</ConversionArrow>
+            <span>
+              {formatNumber(parseFloat(convertedAmount))} {realTargetCurrency}{" "}
+              {getCurrencyEmoji(realTargetCurrency)}
+            </span>
+          </ConversionText>
+        </ConversionResult>
+      )}
+    </Flex>
   );
 };
 

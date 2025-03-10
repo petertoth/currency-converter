@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Table = styled.table`
   width: 100%;
@@ -9,6 +9,7 @@ export const Table = styled.table`
 `;
 
 Table.displayName = "Table";
+
 export const TableContainer = styled.div`
   border-radius: 10px;
   background-color: #ffffff;
@@ -50,16 +51,22 @@ export const Th = styled.th`
 
 Th.displayName = "Th";
 
-export const Td = styled.td<{ emphasized?: string; noWrap?: string }>`
+export const Td = styled.td.withConfig({
+  shouldForwardProp: (prop) => !["emphasized", "noWrap"].includes(prop),
+})<{ emphasized?: string; noWrap?: string }>`
   padding: 12px 15px;
   text-align: start;
 
-  ${props => props.emphasized && `
+  ${(props) =>
+    props.emphasized &&
+    `
     color: var(--color-gray-900);
     font-weight: 500;
   `}
 
-  ${props => props.noWrap && `
+  ${(props) =>
+    props.noWrap &&
+    `
     white-space: nowrap;
   `}
 
@@ -69,5 +76,3 @@ export const Td = styled.td<{ emphasized?: string; noWrap?: string }>`
 `;
 
 Td.displayName = "Td";
-
-

@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 export interface FlexProps {
   direction?: "row" | "column";
   justify?:
@@ -13,30 +15,17 @@ export interface FlexProps {
   children?: React.ReactNode;
 }
 
-export const Flex = ({
-  direction,
-  justify,
-  align,
-  gap,
-  flexGrow,
-  width,
-  children,
-}: FlexProps) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: direction,
-        justifyContent: justify,
-        alignItems: align,
-        gap: gap,
-        flexGrow: flexGrow,
-        width: width,
-      }}
-    >
-      {children}
-    </div>
-  );
-};
+export const Flex = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    !["direction", "justify", "align", "gap", "flexGrow", "width"].includes(prop),
+})<FlexProps>`
+  display: flex;
+  flex-direction: ${(props) => props.direction};
+  justify-content: ${(props) => props.justify};
+  align-items: ${(props) => props.align};
+  gap: ${(props) => (props.gap && `${props.gap}px`)};
+  flex-grow: ${(props) => props.flexGrow};
+  width: ${(props) => props.width};
+`;
 
 Flex.displayName = "Flex";
