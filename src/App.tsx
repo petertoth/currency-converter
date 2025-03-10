@@ -12,8 +12,6 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {error && <div>Error: {error.message}</div>}
-
       <AppGrid>
         <StickyContainer>
           {error ? (
