@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useCentralBankExchangeRates } from "./hooks/useCentalBankExchangeRates";
 import { CurrencyExchangeRatesTable } from "./components/CurrencyExchangeRatesTable";
 import { CurrencyConverter } from "./components/CurrencyConverter";
-import { ThemeProvider, styled } from "styled-components";
+import { styled } from "styled-components";
 
 const queryClient = new QueryClient();
 
@@ -31,15 +31,7 @@ function App() {
 function AppWithProviders() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider
-        theme={{
-          colors: {
-            background: "oklch(0.967 0.003 264.542)",
-          },
-        }}
-      >
-        <App />
-      </ThemeProvider>
+      <App />
     </QueryClientProvider>
   );
 }
