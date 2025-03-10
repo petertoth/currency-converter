@@ -8,21 +8,22 @@ import { ThemeProvider, styled } from "styled-components";
 const queryClient = new QueryClient();
 
 function App() {
-  const { data, isLoading, error } = useCentralBankExchangeRates();
+  const { data, error } = useCentralBankExchangeRates();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {isLoading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}
 
-      {data && (
-        <AppGrid>
-          <StickyContainer>
-            <CurrencyConverter currencyExchangeRates={data} />
-          </StickyContainer>
-          <CurrencyExchangeRatesTable data={data} />
-        </AppGrid>
-      )}
+      <AppGrid>
+        <StickyContainer>
+          {error ? (
+            <ErrorMessage>Error: {error.message}</ErrorMessage>
+          ) : (
+            <CurrencyConverter currencyExchangeRates={data ?? []} />
+          )}
+        </StickyContainer>
+        <CurrencyExchangeRatesTable data={data ?? []} />
+      </AppGrid>
     </QueryClientProvider>
   );
 }
@@ -69,4 +70,8 @@ const StickyContainer = styled.div`
     top: 0;
     height: 100vh;
   }
+`;
+
+const ErrorMessage = styled.div`
+  color: var(--color-red-500);
 `;

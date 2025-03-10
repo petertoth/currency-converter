@@ -80,11 +80,11 @@ export const CurrencyConverter = ({
       const selectedCurrency = findSelectedCurrency(currencyCode);
 
       if (selectedCurrency) {
-        // Recalculate amount in the CZK currency
+        // Calculate the converted amount based on the new currency
         const result =
-          (parseFloat(convertedAmount) * selectedCurrency.rate) /
+          (parseFloat(amount) / selectedCurrency.rate) *
           selectedCurrency.amount;
-        setAmount(formatNumber(result));
+        setConvertedAmount(formatNumber(result));
       }
     }
   };
@@ -130,6 +130,7 @@ export const CurrencyConverter = ({
                 type="number"
                 value={amount}
                 onChange={handleAmountChange}
+                data-testid="amount-input"
               />
               <InputIcon style={{ paddingRight: 16, paddingLeft: 16 }}>
                 <CurrencyDisplay>
@@ -148,6 +149,7 @@ export const CurrencyConverter = ({
                 type="number"
                 value={convertedAmount}
                 onChange={handleConvertedAmountChange}
+                data-testid="converted-amount-input"
               />
               <InputIcon>
                 <SelectGhost
@@ -157,8 +159,8 @@ export const CurrencyConverter = ({
                   style={{
                     width: 112,
                   }}
+                  data-testid="target-currency-select"
                 >
-                  <option value="">Select currency</option>
                   {sortedCurrencyExchangeRates.map((rate) => (
                     <option key={rate.code} value={getCurrencyValue(rate.code)}>
                       {getCurrencyValue(rate.code)}
