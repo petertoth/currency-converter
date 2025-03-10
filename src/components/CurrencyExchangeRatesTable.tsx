@@ -1,6 +1,6 @@
 import { CurrencyExchangeRate } from "../hooks/useCentalBankExchangeRates";
 import { getCurrencyEmoji } from "../utils/getCurrencyEmoji";
-import { sortCurrencyExchangeRates } from '../utils/sortCurrencyExchangeRates';
+import { sortCurrencyExchangeRates } from "../utils/sortCurrencyExchangeRates";
 import { Table, Thead, Tr, Th, Tbody, Td, TableContainer } from "./ui/Table";
 
 export interface CurrencyExchangeRatesTableProps {

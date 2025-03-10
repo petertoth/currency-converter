@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Button = styled.button<{ fullWidth?: boolean }>`
   background-color: var(--color-gray-900);
@@ -6,7 +6,7 @@ export const Button = styled.button<{ fullWidth?: boolean }>`
   padding: 15px 16px;
   border: none;
   border-radius: 8px;
-  width: ${props => props.fullWidth ? '100%' : 'auto'};
+  width: ${(props) => (props.fullWidth ? "100%" : "auto")};
   cursor: pointer;
   font-size: 16px;
   &:hover {
@@ -14,4 +14,4 @@ export const Button = styled.button<{ fullWidth?: boolean }>`
   }
 `;
 
-Button.displayName = 'Button'
+Button.displayName = "Button";

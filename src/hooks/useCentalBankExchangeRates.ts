@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 export interface CurrencyExchangeRate {
   country: string;
@@ -10,36 +10,36 @@ export interface CurrencyExchangeRate {
 
 function parseCentralBankExchangeRates(data: string): CurrencyExchangeRate[] {
   // split by new line and filter out empty lines
-  const lines = data.split('\n').filter(Boolean)
+  const lines = data.split("\n").filter(Boolean);
 
   // Skip the first two lines (header and date)
-  const rates = lines.slice(2).map(line => {
-    const [country, currency, amount, code, rate] = line.split('|')
+  const rates = lines.slice(2).map((line) => {
+    const [country, currency, amount, code, rate] = line.split("|");
 
     return {
       country,
       currency,
       amount: Number(amount.trim()),
       code,
-      rate: Number(rate.trim())
-    } satisfies CurrencyExchangeRate
-  })
+      rate: Number(rate.trim()),
+    } satisfies CurrencyExchangeRate;
+  });
 
   return rates;
 }
 
 async function fetchCentralBankExchangeRates() {
-  const response = await fetch('/api/currency-exchange-rates')
-  const data = await response.text()
+  const response = await fetch("/api/currency-exchange-rates");
+  const data = await response.text();
 
-  const parsedData = parseCentralBankExchangeRates(data)
+  const parsedData = parseCentralBankExchangeRates(data);
 
-  return parsedData
+  return parsedData;
 }
 
 export function useCentralBankExchangeRates() {
   return useQuery({
-    queryKey: ['centralBankExchangeRate'],
+    queryKey: ["centralBankExchangeRate"],
     queryFn: fetchCentralBankExchangeRates,
-  })
+  });
 }

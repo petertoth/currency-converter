@@ -133,9 +133,7 @@ export const CurrencyConverter = ({
                 data-testid="amount-input"
               />
               <InputIcon style={{ paddingRight: 16, paddingLeft: 16 }}>
-                <CurrencyDisplay>
-                  {getCurrencyEmoji("CZK")} CZK
-                </CurrencyDisplay>
+                <CurrencyDisplay>{getCurrencyEmoji("CZK")} CZK</CurrencyDisplay>
               </InputIcon>
             </InputField>
           </Flex>

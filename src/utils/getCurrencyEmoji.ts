@@ -64,6 +64,5 @@ export const getCurrencyEmoji = (currencyCode: string) => {
       return "🇹🇭";
     case "TRY":
       return "🇹🇷";
-
   }
 };

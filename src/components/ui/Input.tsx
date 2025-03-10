@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Input = styled.input`
   padding: 14px 16px;
@@ -14,16 +14,20 @@ export const Input = styled.input`
   }
 `;
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export const InputWithIcon = styled(Input)`
   padding-right: 112px;
   width: 100%;
 `;
 
+InputWithIcon.displayName = "InputWithIcon";
+
 export const InputField = styled.div`
   position: relative;
 `;
+
+InputField.displayName = "InputField";
 
 export const InputIcon = styled.div`
   position: absolute;
@@ -36,3 +40,5 @@ export const InputIcon = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+InputIcon.displayName = "InputIcon";

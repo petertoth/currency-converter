@@ -8,6 +8,7 @@ export const Table = styled.table`
   overflow: hidden;
 `;
 
+Table.displayName = "Table";
 export const TableContainer = styled.div`
   border-radius: 10px;
   background-color: #ffffff;
@@ -18,14 +19,20 @@ export const TableContainer = styled.div`
   margin: 32px 0;
 `;
 
+TableContainer.displayName = "TableContainer";
+
 export const Thead = styled.thead`
   border-radius: inherit;
   background-color: var(--color-gray-50);
 `;
 
+Thead.displayName = "Thead";
+
 export const Tbody = styled.tbody`
   border-top: 1px solid var(--color-gray-300);
 `;
+
+Tbody.displayName = "Tbody";
 
 export const Tr = styled.tr`
   border-bottom: 1px solid var(--color-gray-200);
@@ -34,10 +41,14 @@ export const Tr = styled.tr`
   }
 `;
 
+Tr.displayName = "Tr";
+
 export const Th = styled.th`
   padding: 12px 15px;
   text-align: start;
 `;
+
+Th.displayName = "Th";
 
 export const Td = styled.td<{ emphasized?: string; noWrap?: string }>`
   padding: 12px 15px;
@@ -56,5 +67,7 @@ export const Td = styled.td<{ emphasized?: string; noWrap?: string }>`
     margin-right: 8px;
   }
 `;
+
+Td.displayName = "Td";
 
 

@@ -5,3 +5,5 @@ export const Label = styled.label`
   font-weight: 600;
   color: var(--color-gray-900);
 `;
+
+Label.displayName = "Label";

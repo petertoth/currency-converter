@@ -20,6 +20,8 @@ export const Select = styled.select`
   }
 `;
 
+Select.displayName = "Select";
+
 export const SelectGhost = styled(Select)`
   background-color: transparent;
   border: 1px solid transparent;
@@ -27,4 +29,4 @@ export const SelectGhost = styled(Select)`
   border-bottom-left-radius: 0;
 `;
 
-Select.displayName = "Select";
+SelectGhost.displayName = "SelectGhost";
