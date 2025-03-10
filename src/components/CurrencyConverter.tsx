@@ -26,7 +26,7 @@ export const CurrencyConverter = ({
     getCurrencyValue("USD")
   );
 
-  const realAmount = parseFloat(amount);
+  const realAmount = parseFloat(amount) || 0;
   const realTargetCurrency = targetCurrency.split(" ")[1];
 
   // Helper function to validate decimal places
@@ -48,8 +48,30 @@ export const CurrencyConverter = ({
     return Number(value.toFixed(decimalPlaces)).toString();
   };
 
+  // Helper function to clean number string to remove trailing decimal point or comma
+  function cleanNumberString(numberString: string) {
+    let newNumberString = numberString;
+
+    // Only allow numbers, comma, and dot
+    if (!/^[0-9.,]*$/.test(newNumberString)) {
+      newNumberString = newNumberString.replace(/[^0-9.,]/g, '');
+    }
+
+    return newNumberString;
+  }
+
+  // Helper function to get numeric value for calculation, handling trailing decimal point
+  function getNumericValue(value: string): number {
+    // If the string ends with a decimal point, remove it for calculation
+    const valueForCalculation = value.endsWith('.') || value.endsWith(',')
+      ? value.slice(0, -1)
+      : value;
+
+    return parseFloat(valueForCalculation) || 0;
+  }
+
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newAmount = e.target.value;
+    const newAmount = cleanNumberString(e.target.value);
 
     if (!validateDecimalPlaces(newAmount)) {
       return;
@@ -61,8 +83,9 @@ export const CurrencyConverter = ({
       const selectedCurrency = findSelectedCurrency(realTargetCurrency);
 
       if (selectedCurrency) {
+        const numericValue = getNumericValue(newAmount);
         const result =
-          (parseFloat(newAmount) / selectedCurrency.rate) *
+          (numericValue / selectedCurrency.rate) *
           selectedCurrency.amount;
         setConvertedAmount(formatNumber(result));
       }
@@ -81,8 +104,9 @@ export const CurrencyConverter = ({
 
       if (selectedCurrency) {
         // Calculate the converted amount based on the new currency
+        const numericValue = getNumericValue(amount);
         const result =
-          (parseFloat(amount) / selectedCurrency.rate) *
+          (numericValue / selectedCurrency.rate) *
           selectedCurrency.amount;
         setConvertedAmount(formatNumber(result));
       }
@@ -92,7 +116,7 @@ export const CurrencyConverter = ({
   const handleConvertedAmountChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const newConvertedAmount = e.target.value.replace(/[.,]$/, "");
+    const newConvertedAmount = cleanNumberString(e.target.value);
 
     if (!validateDecimalPlaces(newConvertedAmount)) {
       return;
@@ -105,8 +129,9 @@ export const CurrencyConverter = ({
 
       if (selectedCurrency) {
         // Reverse conversion: from target currency to CZK
+        const numericValue = getNumericValue(newConvertedAmount);
         const result =
-          (parseFloat(newConvertedAmount) * selectedCurrency.rate) /
+          (numericValue * selectedCurrency.rate) /
           selectedCurrency.amount;
         setAmount(formatNumber(result));
       }
@@ -115,7 +140,8 @@ export const CurrencyConverter = ({
     }
   };
 
-  const shouldShowConversionResult = amount && convertedAmount && targetCurrency && !isNaN(realAmount);
+  const shouldShowConversionResult =
+    amount && convertedAmount && targetCurrency && !isNaN(realAmount);
 
   return (
     <Flex gap={12} direction="column">
@@ -128,7 +154,6 @@ export const CurrencyConverter = ({
             <InputWithIcon
               id="amount"
               placeholder="0"
-              type="number"
               value={amount}
               onChange={handleAmountChange}
               data-testid="amount-input"
@@ -145,7 +170,6 @@ export const CurrencyConverter = ({
             <InputWithIcon
               id="convertedAmount"
               placeholder="0"
-              type="number"
               value={convertedAmount}
               onChange={handleConvertedAmountChange}
               data-testid="converted-amount-input"
@@ -179,7 +203,7 @@ export const CurrencyConverter = ({
             </span>
             <ConversionArrow>→</ConversionArrow>
             <span>
-              {formatNumber(parseFloat(convertedAmount))} {realTargetCurrency}{" "}
+              {formatNumber(parseFloat(convertedAmount) || 0)} {realTargetCurrency}{" "}
               {getCurrencyEmoji(realTargetCurrency)}
             </span>
           </ConversionText>
