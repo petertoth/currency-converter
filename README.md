@@ -2,6 +2,8 @@
 
 A simple and intuitive currency converter application that allows users to convert Czech Koruna (CZK) to various foreign currencies based on current exchange rates.
 
+Live demo: [https://currency-converter-aef2.onrender.com/](https://currency-converter-aef2.onrender.com/)
+
 ## Features
 
 - Convert between CZK and multiple foreign currencies
