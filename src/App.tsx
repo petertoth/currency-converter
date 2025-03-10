@@ -1,9 +1,8 @@
-import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useCentralBankExchangeRates } from "./hooks/useCentalBankExchangeRates";
+import { styled } from "styled-components";
 import { CurrencyExchangeRatesTable } from "./components/CurrencyExchangeRatesTable";
 import { CurrencyConverter } from "./components/CurrencyConverter";
-import { styled } from "styled-components";
+import { useCentralBankExchangeRates } from "./hooks/useCentalBankExchangeRates";
 
 const queryClient = new QueryClient();
 
